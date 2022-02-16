@@ -5,3 +5,5 @@ New: Создание репозитория, начало работы []
 New: Добавил terraform kubernetes []
 New: Добавил terraform install_gitlab []
 New: Добавил istio []
+## 16.02.2022
+Improved: Добавил описание установки

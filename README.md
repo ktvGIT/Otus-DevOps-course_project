@@ -51,7 +51,7 @@ yc init
 [terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart)  
 [kubectl](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/)  
 [docker](https://docs.docker.com/engine/install/ubuntu/)  
----
+
 ## Порядок развертывания.
 
 #### Развертывание kubernetes  

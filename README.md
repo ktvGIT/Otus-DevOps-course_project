@@ -35,7 +35,7 @@
 ---
 ---
 ---
-# Данный проект демонстрирует развертывание микросервисного [приложения][https://github.com/GoogleCloudPlatform/microservices-demo] в kubernetes
+## Данный проект демонстрирует развертывание микросервисного [приложения][https://github.com/GoogleCloudPlatform/microservices-demo] в kubernetes
 Автоматизация развертывания kubernetes cluster выполнена при помощи terraform для yandex cloud  
 В качестве менеджера установки приложения в kubernetes используются helm 3  
 Деплой приложения в кластер осуществляется c помощью gitlab ci  
@@ -48,15 +48,13 @@ curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 yc init
 ```
 
-[terraform][https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart]
-
-[kubectl][https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/]
-
-[docker][https://docs.docker.com/engine/install/ubuntu/]
+[terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart)  
+[kubectl]:https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/  
+[docker][https://docs.docker.com/engine/install/ubuntu/]  
 
 ## Порядок развертывания.
 ---
-#### Развертывание kubernetes
+### Развертывание kubernetes  
 ./kubernetes  
 Переименовать  terraform.tfvars.example  в terraform.tfvars  
 Задать пременные   

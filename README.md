@@ -35,13 +35,13 @@
 ---
 ---
 ---
-## Данный проект демонстрирует развертывание микросервисного [приложения][https://github.com/GoogleCloudPlatform/microservices-demo] в kubernetes
+## Данный проект демонстрирует развертывание микросервисного [приложения](https://github.com/GoogleCloudPlatform/microservices-demo) в kubernetes
 Автоматизация развертывания kubernetes cluster выполнена при помощи terraform для yandex cloud  
 В качестве менеджера установки приложения в kubernetes используются helm 3  
 Деплой приложения в кластер осуществляется c помощью gitlab ci  
 Мониторинг приложения производится с использованием Istio, Prometheus, визуализация в Kiali, Grafana  
 ## Неоходимое локальное окружение
-[CLI][https://cloud.yandex.ru/docs/cli/operations/install-cli]  
+[CLI](https://cloud.yandex.ru/docs/cli/operations/install-cli)  
 ```
 curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 После завершения установки перезапустите командную оболочку
@@ -49,8 +49,8 @@ yc init
 ```
 
 [terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart)  
-[kubectl]:https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/  
-[docker][https://docs.docker.com/engine/install/ubuntu/]  
+[kubectl](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/)  
+[docker](https://docs.docker.com/engine/install/ubuntu/)  
 
 ## Порядок развертывания.
 ---
@@ -75,7 +75,7 @@ ssh -i ~/.ssh/ubuntu ubuntu@[адрес хоста]
 Создать группу  
 Создать ранер 
 *** Тут надо, либо опиать процесс устанвки shell ранера со всем, что необходимо для его работы, например ансиблом, либо докер в докере ***  
-[Enable Docker commands in your CI/CD jobs][https://docs.gitlab.com/ee/ci/docker/using_docker_build.html]
+[Enable Docker commands in your CI/CD jobs](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html)
 ```
 sudo gitlab-runner register -n \
   --url https://gitlab.com/ \
@@ -84,7 +84,7 @@ sudo gitlab-runner register -n \
   --description "My Runner"
 sudo usermod -aG docker gitlab-runner  
 ```
-Инструкция в ращделе settings CI/CD
+Инструкция в ращделе settings CI/CD  
 Там же задать необходимые преременные  
 KUBE_TOKEN  
 KUBE_URL  
@@ -117,7 +117,7 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 Там же можно добавить интеграцию Prometheus. Описание подключения тут же  
 При использовани vs code, установить плагин  GitLab VS Code Extension  
 Подключиться к GitLab  
-***Тут нужны подробности***
+***Тут нужны подробности***  
 Сделать commit.. каталога ./shop  
 
 ### Получить адрес  
@@ -126,8 +126,9 @@ kubectl get service frontend-external | awk '{print $4}'
 ~~~
 
 ### Устанокака и равертывание istio
-[istio][https://istio.io/latest/docs/setup/getting-started/]  
-[Visualizing Your Mesh][https://istio.io/latest/docs/tasks/observability/kiali/]  
-[Accessing Kiali][https://kiali.io/docs/installation/installation-guide/accessing-kiali/]
-[Remotely Accessing Telemetry Addons][https://istio.io/latest/docs/tasks/observability/gateways/]
-***Добавлю позже, пока только ссылки***
+[istio](https://istio.io/latest/docs/setup/getting-started/)  
+[Visualizing Your Mesh](https://istio.io/latest/docs/tasks/observability/kiali/)  
+[Accessing Kiali](https://kiali.io/docs/installation/installation-guide/accessing-kiali/)  
+[Remotely Accessing Telemetry Addons](https://istio.io/latest/docs/tasks/observability/gateways/)  
+***Добавлю позже, пока только ссылки***  
+

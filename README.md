@@ -51,17 +51,17 @@ yc init
 [terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart)  
 [kubectl](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/)  
 [docker](https://docs.docker.com/engine/install/ubuntu/)  
-
-## Порядок развертывания.
 ---
-### Развертывание kubernetes  
+## Порядок развертывания.
+
+#### Развертывание kubernetes  
 ./kubernetes  
 Переименовать  terraform.tfvars.example  в terraform.tfvars  
 Задать пременные   
 terraform init  
 terraform plan  
 terraform apply -auto-approve  
----
+
 #### Равернуть GitLab, запусить CI\CD
 ./install_gitlab  
 Переименовать  terraform.tfvars.example  в terraform.tfvars  
@@ -71,7 +71,7 @@ terraform plan
 terraform apply -auto-approve  
 ssh -i ~/.ssh/ubuntu ubuntu@[адрес хоста]  
   
-Создать поект  
+Создать проект  
 Создать группу  
 Создать ранер 
 *** Тут надо, либо опиать процесс устанвки shell ранера со всем, что необходимо для его работы, например ансиблом, либо докер в докере ***  

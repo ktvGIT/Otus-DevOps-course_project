@@ -42,12 +42,6 @@
 Мониторинг приложения производится с использованием Istio, Prometheus, визуализация в Kiali, Grafana  
 ## Неоходимое локальное окружение
 [CLI](https://cloud.yandex.ru/docs/cli/operations/install-cli)  
-```
-curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-После завершения установки перезапустите командную оболочку
-yc init
-```
-
 [terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart)  
 [kubectl](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/)  
 [docker](https://docs.docker.com/engine/install/ubuntu/)  
@@ -69,12 +63,31 @@ terraform apply -auto-approve
 terraform init  
 terraform plan  
 terraform apply -auto-approve  
+Сброс пароля  
 ssh -i ~/.ssh/ubuntu ubuntu@[адрес хоста]  
+~~~
+sudo gitlab-rake "gitlab:password:reset[root]"  
+~~~
   
 Создать проект  
 Создать группу  
 Создать ранер 
-*** Тут надо, либо опиать процесс устанвки shell ранера со всем, что необходимо для его работы, например ансиблом, либо докер в докере ***  
+[Установить kubect](https://galaxy.ansible.com/codecap/kubectl)  
+Исправить hosts  
+./ansible/install_kubectl  
+ansible-playbook -i hosts pb.yml  
+
+Установить docker и другие зависимости  
+/ansible/install_dependencies  
+ansible-playbook -i hosts dependencies.yml  
+
+[CLI](https://cloud.yandex.ru/docs/cli/operations/install-cli) пока рками  
+```
+curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+После завершения установки перезапустите командную оболочку
+yc init
+```
+
 [Enable Docker commands in your CI/CD jobs](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html)
 ```
 sudo gitlab-runner register -n \
@@ -84,7 +97,7 @@ sudo gitlab-runner register -n \
   --description "My Runner"
 sudo usermod -aG docker gitlab-runner  
 ```
-Инструкция в ращделе settings CI/CD  
+Инструкция в разделе settings CI/CD  
 Там же задать необходимые преременные  
 KUBE_TOKEN  
 KUBE_URL  
@@ -97,7 +110,7 @@ REGISTRYID
 Connect with Sertificate  
 Инсрукция 
 ~~~
-адрес сластера  
+адрес кластера  
 kubectl cluster-info | grep -E 'Kubernetes master|Kubernetes control plane' | awk '/http/ {print $NF}'  
 
 Сектификат  

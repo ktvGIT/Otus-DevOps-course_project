@@ -7,3 +7,7 @@ New: Добавил terraform install_gitlab []
 New: Добавил istio []
 ## 16.02.2022
 Improved: Добавил описание установки
+## 17.02.2022
+Improved: Удалил все, начал устанвки по инструкции []
+New: Добавил роли anible для развертрывания docker и kubectl []
+

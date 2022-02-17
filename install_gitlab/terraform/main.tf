@@ -14,13 +14,14 @@ name = "docker-host-app${count.index}"
 
   resources {
     cores  = 2
-    memory = 8
+    memory = 8    
   }
 
   boot_disk {
     initialize_params {
       # Указать id образа созданного в предыдущем домашем задании
       image_id = var.image_id
+      size = 20
     }
   }
 

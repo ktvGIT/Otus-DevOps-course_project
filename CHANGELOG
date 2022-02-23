@@ -10,4 +10,9 @@ Improved: Добавил описание установки
 ## 17.02.2022
 Improved: Удалил все, начал устанвки по инструкции []
 New: Добавил роли anible для развертрывания docker и kubectl []
+## 23.02.2022
+New: Добавлнены helm chart ci/cd сервиса frontend
+New: ansible устанвки helm
+
+
 

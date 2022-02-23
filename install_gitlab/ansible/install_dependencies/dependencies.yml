@@ -11,3 +11,21 @@
        name:
          - mc
        state: present
+   
+   - name: Add apt key
+     apt_key:
+       url: https://baltocdn.com/helm/signing.asc
+       state: present
+
+   - name: Add apt repository and update cache
+     apt_repository:
+        repo: deb https://baltocdn.com/helm/stable/debian/ all main
+        state: present
+        update_cache: true
+   
+   
+   - name: Install helm
+     apt:
+       name:
+         - helm
+       state: present

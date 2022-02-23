@@ -1,9 +1,32 @@
 stages:
   - build
   - deploy
-  
+  - front
+  - prod
+
+front:
+  stage: front
+  when: manual
+  script:
+    # - echo $OAUTH
+    - docker login --username oauth --password $OAUTH cr.yandex         
+    #####тестироваие работы ci/cd hello world
+    # - docker build . -t cr.yandex/$REGISTRYID/hello:gitlab-$CI_COMMIT_SHORT_SHA
+    # - docker push cr.yandex/$REGISTRYID/hello:gitlab-$CI_COMMIT_SHORT_SHA
+    - docker build -t cr.yandex/$REGISTRYID/frontend:gitlab-$CI_COMMIT_SHORT_SHA ./frontend    
+    - docker push cr.yandex/$REGISTRYID/frontend:gitlab-$CI_COMMIT_SHORT_SHA
+
+prod:
+  stage: prod
+  # when: manual
+  script:
+   - if kubectl get namespaces prod; then echo "ns prod is already exist" ; else kubectl create namespace prod && kubectl label namespace prod istio-injection=enabled ; fi
+   - helm dependency build ./helm/all
+   - if helm install shop helm/all -n prod  ; then echo "release is installed"  ; else helm upgrade shop helm/all -n prod ;fi
+
 build:
   stage: build
+  when: manual
   # variables:
     # DOCKER_DRIVER: overlay2
     # DOCKER_TLS_CERTDIR: ""
@@ -23,11 +46,13 @@ build:
 deploy:
 #   image: gcr.io/cloud-builders/kubectl:latest
   stage: deploy
+  when: manual
   script:
     - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster=k8s --user=admin
     - kubectl config use-context default
+    #####тестироваие работы ci/cd hello world
     # - sed -i "s/__VERSION__/gitlab-$CI_COMMIT_SHORT_SHA/" k8s.yaml
     # - kubectl apply -f k8s.yaml
     - kubectl apply -f ./microservices-demo/release/kubernetes-manifests.yaml

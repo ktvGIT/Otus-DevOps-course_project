@@ -1,0 +1,7 @@
+apiVersion: v2
+name: deploy
+version: 1.0.0
+description: deploy
+maintainers:
+ - name: ktv
+appVersion: 1.0.0

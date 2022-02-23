@@ -1,0 +1,6 @@
+dependencies:
+- name: deploy
+  repository: file://../deploy
+  version: 1.0.0
+digest: sha256:e6494b10eada55c404dba9c04becd2efd3fb96ebb5c21d9e59a1a5fa763a7bde
+generated: "2022-02-23T19:16:42.891165694+03:00"

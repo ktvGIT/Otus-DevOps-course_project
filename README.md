@@ -201,8 +201,8 @@ echo $INGRESS_DOMAIN
 
 
 
-Пример исходнго кода сервиса frontend```./shop/frontend ```  
-Хелм чарты для установки сервисов ```./helm ```  
+Исходные коды сервисов ```./shop/src ```  
+Хелм чарты для установки сервисов ```./shop/helm  ```  
 Пример запуска:  
 ~~~
 helm dependency build ./helm/all

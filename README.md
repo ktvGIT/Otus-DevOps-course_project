@@ -7,38 +7,38 @@
 /shop
 Исходные коды микросервисов
  /src
-  adservice
-  cartservice
-  checkoutservice
-  currencyservice
-  Dockerfile
-  emailservice
-  frontend
-  loadgenerator
-  paymentservice
-  productcatalogservice
-  recommendationservice
-  shippingservice
-хелм чары кажждого микросервиса
-  /helm
+  adservice  
+  cartservice  
+  checkoutservice  
+  currencyservice  
+  Dockerfile  
+  emailservice  
+  frontend  
+  loadgenerator  
+  paymentservice  
+  productcatalogservice  
+  recommendationservice  
+  shippingservice  
+хелм чары кажждого микросервиса  
+  /helm  
 Деплой всех микросервсов   
    /all  
-Хелм чарты каждого микросервиса в отдельности 
+Хелм чарты каждого микросервиса в отдельности  
    /deploy 
-    /templates
-    Chart.yaml
-    values.yaml
+    /templates  
+    Chart.yaml  
+    values.yaml  
 
- .gitlab-ci.yml
-Имеет четыре задачи.
+ .gitlab-ci.yml  
+Имеет четыре задачи.  
   - build_tst пустой тестовый контейнер выдающий в лог при запуске слово hello. Используется для отладки и настройки подключения к репозиторию  
   - deploy_tst  Деплой контейнера собранного в build_tst или деплой microservices-demo предворительно скачанного [здесь](https://github.com/GoogleCloudPlatform/microservices-demo)  
-  - build_frontend Тестовый билт микросервиса и размещение его в предвоительно созданном Container Registry yandex (иструкция для подключения ниже)
+  - build_frontend Тестовый билт микросервиса и размещение его в предвоительно созданном Container Registry yandex (иструкция для подключения ниже)  
   - deploy деплой всех микросевисов одним релизом с возможностью определять имя образа через values.yaml (сделано только для frontend как демонстрация)  
 
-Деплой для отладки работы Gitlab
-Dockerfile
-k8s.yaml
+Деплой для отладки работы Gitlab  
+Dockerfile  
+k8s.yaml  
 
 # Иструкция развертыавания ифроструктуры
 ## Неоходимое локальное окружение

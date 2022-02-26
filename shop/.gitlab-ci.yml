@@ -1,11 +1,11 @@
 stages:
-  - build
+  - build_tst
+  - deploy_tst
+  - build_frontend
   - deploy
-  - front
-  - prod
 
-front:
-  stage: front
+build_frontend:
+  stage: build_frontend
   when: manual
   script:
     # - echo $OAUTH
@@ -13,19 +13,19 @@ front:
     #####тестироваие работы ci/cd hello world
     # - docker build . -t cr.yandex/$REGISTRYID/hello:gitlab-$CI_COMMIT_SHORT_SHA
     # - docker push cr.yandex/$REGISTRYID/hello:gitlab-$CI_COMMIT_SHORT_SHA
-    - docker build -t cr.yandex/$REGISTRYID/frontend:gitlab-$CI_COMMIT_SHORT_SHA ./frontend    
+    - docker build -t cr.yandex/$REGISTRYID/frontend:gitlab-$CI_COMMIT_SHORT_SHA ./src/frontend    
     - docker push cr.yandex/$REGISTRYID/frontend:gitlab-$CI_COMMIT_SHORT_SHA
 
-prod:
-  stage: prod
+deploy:
+  stage: deploy
   # when: manual
   script:
    - if kubectl get namespaces prod; then echo "ns prod is already exist" ; else kubectl create namespace prod && kubectl label namespace prod istio-injection=enabled ; fi
    - helm dependency build ./helm/all
    - if helm install shop helm/all -n prod  ; then echo "release is installed"  ; else helm upgrade shop helm/all -n prod ;fi
 
-build:
-  stage: build
+build_tst:
+  stage: build_tst
   when: manual
   # variables:
     # DOCKER_DRIVER: overlay2
@@ -43,9 +43,9 @@ build:
     # - yc container registry configure-docker
     - docker push cr.yandex/$REGISTRYID/hello:gitlab-$CI_COMMIT_SHORT_SHA
       
-deploy:
+deploy_tst:
 #   image: gcr.io/cloud-builders/kubectl:latest
-  stage: deploy
+  stage: deploy_tst
   when: manual
   script:
     - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true

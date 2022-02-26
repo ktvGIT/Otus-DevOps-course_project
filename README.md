@@ -1,45 +1,46 @@
-# Проектная работа в рамках обучающего курса Otus -</p> "Devops практики и инструменты".
-# Тема проектной работы Создание процесса непрерывной поставки для приложения с применением Практик CI/CD и быстрой обратной связью
-
-# Требования
-## Автоматизированные процессы создания и управления платформой
-- Ресурсы Ya.cloud
-- Инфраструктура для CI/CD
-- Инфраструктура для сбора обратной связи
-## Использование практики IaC (Infrastructure as Code) для управления конфигурацией и инфраструктурой
-- Настроен процесс CI/CD
-- Все, что имеет отношение к проекту хранится в Git
-
-## Настроен процесс сбора обратной связи
-- Мониторинг (сбор метрик, алертинг, визуализация)
-- Логирование (опционально)
-- Трейсинг (опционально)
-- ChatOps (опционально)
-
-## Документация
-- README по работе с репозиторием
-- Описание приложения и его архитектуры
-- How to start?
-- ScreenCast
-- CHANGELOG с описанием выполненной работы
-- Если работа в группе, то пункт включает автора изменений
-
-## Сроки досдачи проверки ДЗ
-- [x] Дедлайн по созданию PR к ДЗ 25.02.2022
-- [] Дата окончания курса 01.03.2022
-
-## Сроки сдачи проектов
-- [x] 15.02.2022 - день сдачи MVP проекта (готовность не менее 50%). Все кто показал MVP с репо, становятся претендентами на приемку проекта
-- [] 25.02.2022 - все кто показывал MVP вносят последние правки и приводят в порядок документацию, changelog и т.п.
-- [] 01.03.2022 - финальное занятие
----
----
----
 ## Данный проект демонстрирует развертывание микросервисного [приложения](https://github.com/GoogleCloudPlatform/microservices-demo) в kubernetes
 Автоматизация развертывания kubernetes cluster выполнена при помощи terraform для yandex cloud  
 В качестве менеджера установки приложения в kubernetes используются helm 3  
 Деплой приложения в кластер осуществляется c помощью gitlab ci  
 Мониторинг приложения производится с использованием Istio, Prometheus, визуализация в Kiali, Grafana  
+## Описание структуры проекта
+/shop
+Исходные коды микросервисов
+ /src
+  adservice
+  cartservice
+  checkoutservice
+  currencyservice
+  Dockerfile
+  emailservice
+  frontend
+  loadgenerator
+  paymentservice
+  productcatalogservice
+  recommendationservice
+  shippingservice
+хелм чары кажждого микросервиса
+  /helm
+Деплой всех микросервсов   
+   /all  
+Хелм чарты каждого микросервиса в отдельности 
+   /deploy 
+    /templates
+    Chart.yaml
+    values.yaml
+
+ .gitlab-ci.yml
+Имеет четыре задачи.
+  - build_tst пустой тестовый контейнер выдающий в лог при запуске слово hello. Используется для отладки и настройки подключения к репозиторию  
+  - deploy_tst  Деплой контейнера собранного в build_tst или деплой microservices-demo предворительно скачанного [здесь](https://github.com/GoogleCloudPlatform/microservices-demo)  
+  - build_frontend Тестовый билт микросервиса и размещение его в предвоительно созданном Container Registry yandex (иструкция для подключения ниже)
+  - deploy деплой всех микросевисов одним релизом с возможностью определять имя образа через values.yaml (сделано только для frontend как демонстрация)  
+
+Деплой для отладки работы Gitlab
+Dockerfile
+k8s.yaml
+
+# Иструкция развертыавания ифроструктуры
 ## Неоходимое локальное окружение
 [CLI](https://cloud.yandex.ru/docs/cli/operations/install-cli)  
 [terraform](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart)  
@@ -128,19 +129,19 @@ REGISTRYID
 Подключение kubernetes
 Раздел Infrestructure  
 Connect with Sertificate  
-Инсрукция 
+Инструкция 
 ~~~
 адрес кластера  
 kubectl cluster-info | grep -E 'Kubernetes master|Kubernetes control plane' | awk '/http/ {print $NF}'  
 
-Сектификат  
+Сертификат  
 kubectl get secrets  
 List the secrets with kubectl get secrets, and one should be named similar to  
 default-token-xxxxx. Copy that token name for use below.  
 Get the certificate by running this command:  
 kubectl get secret <secret name> -o jsonpath="{['data']['ca\.crt']}" | base64 --decode  
 
-Примение привязки учетной записи службы и роли кластера к вашему кластеру:  
+Применение привязки учетной записи службы и роли кластера к вашему кластеру:  
 kubectl apply -f ./install_gitlab/gitlab-admin-service-account.yaml  
 
 Получите токен для gitlab учетной записи службы  
@@ -149,13 +150,12 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 ~~~
 Там же можно добавить интеграцию Prometheus. Описание подключения тут же на странице  
 
-
 ### Получить адрес поднявшегося сайта  
 ~~~
 kubectl get service frontend-external | awk '{print $4}'  
 ~~~
-
-### Устанокака и равертывание istio
+[Screenshot of store homepage](./docs/img/shop.PNG)
+### Установка и развертывание istio
 
 [istio](https://istio.io/latest/docs/setup/install/istioctl/)  
 ~~~
@@ -196,7 +196,3 @@ echo $INGRESS_DOMAIN
 helm dependency build ./helm/all
 helm install shop helm/all -n prod
 ~~~
-
-
-
-

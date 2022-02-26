@@ -154,7 +154,10 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 ~~~
 kubectl get service frontend-external | awk '{print $4}'  
 ~~~
-[Screenshot of store homepage](./docs/img/shop.PNG)
+<p align="center">
+<img src="./docs/img/shop.PNG" />
+</p>
+
 ### Установка и развертывание istio
 
 [istio](https://istio.io/latest/docs/setup/install/istioctl/)  

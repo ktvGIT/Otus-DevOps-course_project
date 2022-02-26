@@ -57,11 +57,20 @@ terraform init
 terraform plan  
 terraform apply -auto-approve  
 
+<p align="center">
+<img src="./docs/img/resurses.PNG" />
+</p>
+
 Подключиться локально:  
 rm ~/.kube/config 
 yc managed-kubernetes cluster get-credentials [имя кластера] --external
 
 #### Равернуть GitLab, запусить CI\CD
+  
+<p align="center">
+<img src="./docs/img/Gitlab.PNG" />
+</p>
+  
 ./install_gitlab  
 Переименовать  terraform.tfvars.example  в terraform.tfvars  
 Задать пременные   
@@ -199,3 +208,19 @@ echo $INGRESS_DOMAIN
 helm dependency build ./helm/all
 helm install shop helm/all -n prod
 ~~~
+  
+<p align="center">
+<img src="./docs/img/kiami.PNG" />
+</p>
+  
+<p align="center">
+<img src="./docs/img/jaeger.PNG" />
+</p>
+   
+<p align="center">
+<img src="./docs/img/grafana.PNG" />
+</p>
+  
+<p align="center">
+<img src="./docs/img/prometheus.PNG" />
+</p>
